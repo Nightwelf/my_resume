@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Берняев Павел — Flutter разработчик</title>
+<meta name="description" content="Резюме Flutter-разработчика Павла Берняева">
+<style>
+  :root {
+    --bg: #f7f7f9;
+    --bg-card: #ffffff;
+    --text: #1d1d21;
+    --text-muted: #5a5a66;
+    --accent: #2f6fed;
+    --accent-soft: #e8effe;
+    --border: #e4e4ea;
+    --shadow: 0 1px 3px rgba(20,20,30,0.06), 0 8px 24px rgba(20,20,30,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14151a;
+      --bg-card: #1c1d24;
+      --text: #eaeaf0;
+      --text-muted: #9c9ca8;
+      --accent: #6f9bff;
+      --accent-soft: #232a42;
+      --border: #2b2c35;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #14151a;
+    --bg-card: #1c1d24;
+    --text: #eaeaf0;
+    --text-muted: #9c9ca8;
+    --accent: #6f9bff;
+    --accent-soft: #232a42;
+    --border: #2b2c35;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
+  }
+
+  .theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  header.hero {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    flex-wrap: wrap;
+  }
+
+  header.hero img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid var(--accent-soft);
+  }
+
+  header.hero .id { flex: 1; min-width: 240px; }
+
+  header.hero h1 {
+    margin: 0 0 4px;
+    font-size: 1.9rem;
+    letter-spacing: -0.01em;
+  }
+
+  header.hero .role {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+
+  .meta-row a { color: inherit; text-decoration: none; }
+  .meta-row a:hover { color: var(--accent); }
+
+  .cta-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    color: var(--text);
+    transition: transform .1s ease, border-color .15s ease;
+  }
+  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { opacity: 0.92; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    header.hero { text-align: center; justify-content: center; }
+    .meta-row { justify-content: center; }
+    .cta-row { justify-content: center; }
+  }
+
+  section.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+
+  section.card h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+  }
+
+  .chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  ul.plain { margin: 0; padding-left: 18px; }
+  ul.plain li { margin-bottom: 6px; }
+
+  .pkg {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .pkg:last-child { margin-bottom: 0; }
+  .pkg-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  .pkg-links {
+    margin-bottom: 6px;
+  }
+  .pkg-links a {
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .pkg-links a:not(:last-child)::after {
+    content: "·";
+    margin: 0 6px;
+    color: var(--border);
+  }
+  .pkg-links a:hover { text-decoration: underline; }
+  .pkg-desc { font-size: 0.85rem; color: var(--text-muted); }
+
+  .job {
+    position: relative;
+    padding-left: 22px;
+    border-left: 2px solid var(--border);
+    padding-bottom: 26px;
+  }
+  .job:last-child { padding-bottom: 0; }
+  .job::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .job .period {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+  }
+  .job h3 {
+    margin: 0 0 2px;
+    font-size: 1.08rem;
+  }
+  .job .org {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .job .org a { color: inherit; }
+  .job ul.plain { margin-bottom: 10px; }
+  .job .stack {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .job .stack b { color: var(--text); font-weight: 600; }
+  .job .subproject {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: var(--accent-soft);
+    border-radius: 10px;
+  }
+  .job .subproject h4 {
+    margin: 0 0 6px;
+    font-size: 0.92rem;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-top: 30px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media print {
+    :root {
+      --bg: #ffffff;
+      --bg-card: #ffffff;
+      --text: #1d1d21;
+      --text-muted: #5a5a66;
+      --accent: #2f6fed;
+      --accent-soft: #e8effe;
+      --border: #e4e4ea;
+    }
+    .theme-toggle { display: none; }
+    body { background: #fff; }
+    section.card, header.hero { box-shadow: none; }
+    header.hero, aside section.card, .pkg, .subproject { break-inside: avoid; }
+    .job li { break-inside: avoid; }
+    .job .period, .job h3, .job .org { break-inside: avoid; break-after: avoid; }
+    .layout { grid-template-columns: 300px 1fr; }
+  }
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Переключить тему">🌓</button>
+<div class="wrap">
+
+  <header class="hero">
+    <img src="ava1.jpg" alt="Берняев Павел Олегович">
+    <div class="id">
+      <h1>Берняев Павел Олегович</h1>
+      <div class="role">Senior Flutter Developer</div>
+      <div class="meta-row">
+        <span>📍 Екатеринбург</span>
+        <span>🎂 13 марта 1990</span>
+        <span>🎓 Высшее образование</span>
+        <span>💼 Полная занятость, полный день</span>
+        <span>✈️ Командировки: нет</span>
+      </div>
+      <div class="meta-row">
+        <span>📞 <a href="tel:+79630444499">+7 963 044-44-99</a></span>
+        <span>✉️ <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a></span>
+        <span>📨 <a href="https://t.me/nightwelf" target="_blank" rel="noopener">@nightwelf</a></span>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="resume.pdf">Скачать резюме (PDF)</a>
+        <a class="btn" href="https://github.com/Nightwelf" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/pavelbernyaev/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://t.me/nightwelf" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn" href="mailto:nightwelf@gmail.com">Написать</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <aside>
+      <section class="card">
+        <h2>О себе</h2>
+        <p style="margin:0; font-size:0.9rem; color:var(--text-muted);">
+          Flutter-разработчик с 6+ годами продакшен-опыта. Проектирую архитектуру сложных приложений с нуля,
+          пишу production-пакеты для pub.dev и лично собираю команды, с которыми легко доводить проект от идеи до релиза.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Образование</h2>
+        <p style="margin:0; font-size:0.9rem;">
+          Уральский федеральный университет имени первого Президента России Б.Н. Ельцина,
+          Радиотехнический факультет, 230100 «Информатика и вычислительная техника» (магистр)
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Опубликованные пакеты</h2>
+
+        <div class="pkg">
+          <div class="pkg-title">multilevel_navigator</div>
+          <div class="pkg-links">
+            <a href="https://pub.dev/packages/multilevel_navigator" target="_blank" rel="noopener">pub.dev</a><a href="https://github.com/Nightwelf/multilevel_navigator" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="pkg-desc">Адаптивная 4-уровневая навигация поверх go_router с 5 режимами отображения и сохранением состояния.</div>
+        </div>
+
+        <div class="pkg">
+          <div class="pkg-title">chat_message_composer</div>
+          <div class="pkg-links">
+            <a href="https://pub.dev/packages/chat_message_composer" target="_blank" rel="noopener">pub.dev</a><a href="https://github.com/Nightwelf/chat_message_composer" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="pkg-desc">Композитный виджет составления сообщений чата: текст, вложения, упоминания, эмодзи, на базе flutter_quill.</div>
+        </div>
+
+        <div class="pkg">
+          <div class="pkg-title">delta_text_view</div>
+          <div class="pkg-links">
+            <a href="https://pub.dev/packages/delta_text_view" target="_blank" rel="noopener">pub.dev</a><a href="https://github.com/Nightwelf/delta_text_view" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="pkg-desc">Рендеринг Delta-формата в Flutter-виджеты без зависимости от flutter_quill.</div>
+        </div>
+
+        <div class="pkg">
+          <div class="pkg-title">fit_grid</div>
+          <div class="pkg-links">
+            <a href="https://pub.dev/packages/fit_grid" target="_blank" rel="noopener">pub.dev</a><a href="https://github.com/Nightwelf/fit_grid" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="pkg-desc">Адаптивная сетка карточек с автоматическим подбором размеров и раскладкой на layout-фазе.</div>
+        </div>
+
+        <div class="pkg">
+          <div class="pkg-title">audio_waveform_kit</div>
+          <div class="pkg-links">
+            <a href="https://pub.dev/packages/audio_waveform_kit" target="_blank" rel="noopener">pub.dev</a><a href="https://github.com/Nightwelf/audio_waveform_kit" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="pkg-desc">Запись аудио с realtime FFT-визуализацией на чистом Dart, полностью кроссплатформенный.</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Технологии</h2>
+        <div class="chip-group">
+          <span class="chip">Flutter</span>
+          <span class="chip">Dart</span>
+          <span class="chip">BLoC</span>
+          <span class="chip">Dio</span>
+          <span class="chip">auto_route</span>
+          <span class="chip">go_router</span>
+          <span class="chip">provider</span>
+          <span class="chip">freezed</span>
+          <span class="chip">RxDart</span>
+          <span class="chip">get_it</span>
+          <span class="chip">Drift</span>
+          <span class="chip">flutter_localizations</span>
+          <span class="chip">Quill</span>
+          <span class="chip">WebSocket</span>
+          <span class="chip">Centrifuge</span>
+          <span class="chip">Matrix</span>
+          <span class="chip">GraphQL</span>
+          <span class="chip">WebRTC</span>
+          <span class="chip">Firebase</span>
+          <span class="chip">REST</span>
+          <span class="chip">SIP</span>
+          <span class="chip">Git</span>
+          <span class="chip">MSSQL</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Vuetify</span>
+          <span class="chip">Leaflet</span>
+          <span class="chip">Figma</span>
+          <span class="chip">Go</span>
+          <span class="chip">Vue.js</span>
+          <span class="chip">Redis</span>
+          <span class="chip">Linux</span>
+          <span class="chip">C#</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>AI-инструменты</h2>
+        <div class="chip-group">
+          <span class="chip">Claude</span>
+          <span class="chip">Cursor</span>
+        </div>
+      </section>
+    </aside>
+
+    <main>
+      <section class="card">
+        <h2>Опыт работы</h2>
+
+        <div class="job">
+          <div class="period">Апрель 2025 — июль 2026</div>
+          <h3>Ведущий Flutter разработчик</h3>
+          <div class="org">ООО «Сател» · <a href="https://satel.org" target="_blank" rel="noopener">satel.org</a></div>
+          <p style="margin:0 0 8px; font-weight:600;">За время работы:</p>
+          <ul class="plain">
+            <li>Выполнил рефакторинг архитектуры фичи звонков (полная кросс-платформа): самостоятельно спроектировал архитектуру и полностью переписал огромный пласт легаси кода, на стеке SIP + Socket + REST</li>
+            <li>Полностью переписал фичу чатов с нуля (полная кросс-платформа): самостоятельно спроектировал архитектуру и реализовал всю фичу целиком, на стеке Centrifuge + REST</li>
+            <li>Для отображения видео в звонках использовал собственный пакет fit_grid, опубликованный на pub.dev (подробнее — ниже)</li>
+            <li>Перевёл приложение на собственный навигатор — multilevel_navigator на базе go_router (подробнее — ниже)</li>
+            <li>В фиче чатов использовал собственные пакеты для композиции сообщений (chat_message_composer) и рендеринга Delta-формата (delta_text_view)</li>
+          </ul>
+          <div class="subproject">
+            <h4>Результат</h4>
+            В рамках проекта UC (корпоративный мессенджер) реализовал функционал чатов (личные и групповые на базе Centrifuge) и статусов онлайна пользователей, выполнил рефакторинг функционала аудио/видео звонков.
+          </div>
+          <p class="stack" style="margin-top:10px;"><b>Стек:</b> BLoC, WebRTC, Centrifuge, Socket, Dio, Matrix, Firebase, Clean Architecture</p>
+        </div>
+
+        <div class="job">
+          <div class="period">Март 2025 — апрель 2025</div>
+          <h3>Ведущий Flutter разработчик</h3>
+          <div class="org">GiftBow</div>
+          <p style="margin:0 0 8px;">Спроектировал архитектуру и реализовал логику и UI приложения с нуля.</p>
+          <p class="stack"><b>Стек:</b> BLoC, Dio, Firebase</p>
+        </div>
+
+        <div class="job">
+          <div class="period">Декабрь 2024 — март 2025</div>
+          <h3>Ведущий Flutter разработчик</h3>
+          <div class="org">М-Видео — Эльдорадо</div>
+          <p style="margin:0 0 8px;">Разработал web-приложение на Flutter для внутренних нужд компании: модули движения товаров, калькулятора доставки, ремонтов и трейд-ина.</p>
+          <p class="stack"><b>Стек:</b> provider</p>
+        </div>
+
+        <div class="job">
+          <div class="period">Июнь 2022 — декабрь 2024</div>
+          <h3>Техлид Flutter разработки</h3>
+          <div class="org">ООО «НПЦ» · <a href="https://dlgroup.online" target="_blank" rel="noopener">dlgroup.online</a></div>
+          <p style="margin:0 0 8px; font-weight:600;">За время работы:</p>
+          <ul class="plain">
+            <li>Спроектировал с нуля архитектуру корпоративного супер-приложения DLS, единолично принимая ключевые технические решения на всём цикле разработки</li>
+            <li>Самостоятельно сформировал команду разработки и руководил ей от архитектуры до релиза на шести платформах: iOS, Android, macOS, Windows, Linux и Web</li>
+            <li>Разделил супер-апп на независимые, переиспользуемые пакеты; разработал стандарты и спецификации разработки для команды</li>
+            <li>Реализовал ключевой функционал: чаты (личные и групповые, на базе Matrix), звонки (групповые и персональные, включая звонок пользователю из контактов телефона — LiveKit + Firebase), задачи (список, дерево, канбан), портфели и проекты, организационную структуру компании, профиль пользователя и настройки</li>
+            <li>Выстроил процессы в команде: code review, разработку бизнес-логики, вёрстку по дизайну Figma, интеграцию Firebase</li>
+            <li>Провёл 200+ технических собеседований, оценивая и нанимая кандидатов в команду</li>
+          </ul>
+          <div class="subproject">
+            <h4>Результат</h4>
+            DLS — полноценное кроссплатформенное супер-приложение, построенное с нуля под моим техническим руководством: от архитектурной концепции до релиза на iOS, Android, macOS, Windows, Linux и Web.
+          </div>
+          <p class="stack" style="margin-top:10px;"><b>Стек:</b> BLoC со state на sealed-классах, auto_route, WebRTC (LiveKit), Matrix, Drift, Firebase, Dio, GraphQL, RxDart, flutter_quill</p>
+        </div>
+
+        <div class="job">
+          <div class="period">Ноябрь 2021 — июнь 2022</div>
+          <h3>Flutter разработчик</h3>
+          <div class="org">Harddays</div>
+          <p style="margin:0;">Разработал ряд аутсорс-проектов на Flutter с нуля и в команде: приложение доставки еды для малых городов (Vilka), приложение для инспекторов г. Москва (ОАТИ), приложение управления устройством по Bluetooth (Небудильник), карту лояльности сетевого магазина (Loyalty.HD). Выполнил вёрстку по дизайну Figma и интеграцию сервисов (Firebase, Google, Apple, Яндекс, карты).</p>
+        </div>
+
+        <div class="job">
+          <div class="period">Сентябрь 2013 — апрель 2022</div>
+          <h3>Ведущий инженер-программист</h3>
+          <div class="org">АО «Уралэлектромедь»</div>
+          <p style="margin:0 0 8px; font-weight:600;">За время работы:</p>
+          <ul class="plain">
+            <li>Разработал мобильное корпоративное приложение — новости, зарплата, спецодежда, телефонный справочник — вместе с сопутствующей инфраструктурой: web-приложением администрирования контента, API-сервером и БД. Стек: Flutter, Node.js, MySQL, MSSQL, Vue.js + Vuetify</li>
+            <li>Создал мобильное приложение для информирования об инцидентах с push-уведомлениями (Firebase) и лентой описаний, а также его web-админку и backend</li>
+            <li>Разработал web-приложения для выдачи и проверки отметок разового пропуска для охраны предприятия</li>
+            <li>Реализовал информационный киоск — терминал для получения детальной информации о сотруднике (Node.js, MySQL/MSSQL, Vue.js + Vuetify, C#)</li>
+            <li>Разработал web-приложение для контроля движения транспорта по GPS-трекеру (Leaflet) и систему отслеживания использования парковочных мест</li>
+            <li>Внедрил продуктивный Docker-сервер (Linux) для всех разработанных проектов</li>
+            <li>Администрировал ИТ-инфраструктуру предприятия: серверы Linux и Windows, систему мониторинга транспорта Wialon, информационные табло остановочных комплексов, портал MS SharePoint, поддержку пользователей клиент-банков и ЭЦП от СКБ Контур</li>
+          </ul>
+          <div class="subproject">
+            <h4>Результат</h4>
+            За 9 лет прошёл путь от разработки отдельных сервисов до полноценного владения архитектурой, внедрением и поддержкой ИТ-инфраструктуры крупного промышленного предприятия.
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Берняев Павел Олегович · Flutter разработчик · <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a> · <a href="https://github.com/Nightwelf" target="_blank" rel="noopener">github.com/Nightwelf</a>
+  </footer>
+
+</div>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function timeTheme() {
+      var h = new Date().getHours();
+      return (h >= 7 && h < 20) ? 'light' : 'dark';
+    }
+    var saved = localStorage.getItem('theme');
+    root.setAttribute('data-theme', saved || timeTheme());
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+</script>
+</body>
+</html>
