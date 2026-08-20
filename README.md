@@ -17,24 +17,6 @@
 - Образование: Высшее
 - Дата рождения: 13 марта 1990
 
-### Мои публикации (pub.dev)
-
-- multilevel_navigator
-- chat_message_composer
-- delta_text_view
-- fit_grid
-- audio_waveform_kit
-
-### Активно использую
-
-BLoC, provider, Dio, go_router, auto_route, Drift, get_it, freezed, RxDart, WebRTC, WebSocket, GraphQL, Matrix, Centrifuge, Quill, flutter_localizations, Firebase, SIP и т.д.
-
-### Языки программирования, фреймворки и технологии
-
-Flutter, Dart, Git, Rest, Go, C#, Nodejs, Vuejs, Vuetify, Leaflet, Figma, Linux, Docker, Mysql, Mssql, Redis
-
-**AI:** Claude, Cursor
-
 ### О себе
 
 Flutter-разработчик с 6+ годами продакшен-опыта. Проектирую архитектуру сложных приложений с нуля, пишу production-пакеты для pub.dev и лично собираю команды, с которыми легко доводить проект от идеи до релиза.
@@ -42,6 +24,22 @@ Flutter-разработчик с 6+ годами продакшен-опыта.
 ### Образование
 
 Уральский федеральный университет имени первого Президента России Б.Н. Ельцина, Радиотехнический факультет, 230100 Информатика и вычислительная техника (магистр)
+
+### Опубликованные пакеты (pub.dev)
+
+- multilevel_navigator
+- chat_message_composer
+- delta_text_view
+- fit_grid
+- audio_waveform_kit
+
+### Технологии
+
+Flutter, Dart, BLoC, Dio, auto_route, go_router, provider, freezed, RxDart, get_it, Drift, flutter_localizations, Quill, WebSocket, Centrifuge, Matrix, GraphQL, WebRTC, Firebase, REST, SIP, Git, MSSQL, Node.js, MySQL, Docker, Vuetify, Leaflet, Figma, Go, Vue.js, Redis, Linux, C# и т.д.
+
+### AI-инструменты
+
+Claude, Cursor
 
 ---
 
