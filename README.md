@@ -32,6 +32,10 @@ Senior Flutter-разработчик, 5 лет коммерческой Flutter
 - fit_grid
 - audio_waveform_kit
 
+### Личные проекты
+
+- [Dropoly](https://nightwelf.github.io/dropoly/index.html) — мобильная головоломка в жанре number merge drop
+
 ### Технологии
 
 Flutter, Dart, BLoC, Dio, auto_route, go_router, provider, freezed, RxDart, get_it, Drift, flutter_localizations, Quill, WebSocket, Centrifuge, Matrix, GraphQL, WebRTC, Firebase, REST, SIP, Git, MSSQL, Node.js, MySQL, Docker, Vuetify, Leaflet, Figma, Go, Vue.js, Redis, Linux, C# и т.д.
@@ -103,6 +107,20 @@ Claude, Cursor
 - Web-приложение для отслеживания частоты использования парковочного места владельцем.
 
 **Стек:** Flutter, Node.js, MySQL, MSSQL, Vue.js, Vuetify, Leaflet, C#, git
+
+---
+
+## Личные проекты
+
+### Dropoly — мобильная головоломка number merge drop
+
+[Сайт проекта](https://nightwelf.github.io/dropoly/index.html)
+
+- Казуальная игра в жанре number merge drop: тап по колонке роняет плитку, слияние с соседями того же номинала запускает каскад с множителем очков
+- 4 режима сложности (Easy/Normal/Hard/Expert) — видимость следующей плитки, частота бомб, условие проигрыша и максимальный номинал плитки
+- Ежедневный челлендж на общем сиде: одинаковая последовательность плиток для всех игроков
+- Прокачка: монеты и опыт открывают скины плиток, аватары, темы интерфейса; система достижений за каскады
+- Полностью офлайн, без аккаунтов — прогресс, монеты и рекорды хранятся на устройстве
 
 ---
 
